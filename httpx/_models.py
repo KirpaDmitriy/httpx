@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import datetime
 import email.message
-import json as jsonlib
+import orjson as jsonlib
 import typing
 import urllib.request
 from collections.abc import Mapping

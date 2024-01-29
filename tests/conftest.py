@@ -1,5 +1,5 @@
 import asyncio
-import json
+import orjson
 import os
 import threading
 import time
@@ -172,7 +172,7 @@ async def echo_headers(scope: Scope, receive: Receive, send: Send) -> None:
             "headers": [[b"content-type", b"application/json"]],
         }
     )
-    await send({"type": "http.response.body", "body": json.dumps(body).encode()})
+    await send({"type": "http.response.body", "body": orjson.dumps(body).encode()})
 
 
 async def redirect_301(scope: Scope, receive: Receive, send: Send) -> None:

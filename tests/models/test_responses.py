@@ -1,4 +1,4 @@
-import json
+import orjson
 import pickle
 import typing
 
@@ -788,7 +788,7 @@ def test_unknown_status_code():
 
 def test_json_with_specified_encoding():
     data = {"greeting": "hello", "recipient": "world"}
-    content = json.dumps(data).encode("utf-16")
+    content = orjson.dumps(data).encode("utf-16")
     headers = {"Content-Type": "application/json, charset=utf-16"}
     response = httpx.Response(
         200,
@@ -800,7 +800,7 @@ def test_json_with_specified_encoding():
 
 def test_json_with_options():
     data = {"greeting": "hello", "recipient": "world", "amount": 1}
-    content = json.dumps(data).encode("utf-16")
+    content = orjson.dumps(data).encode("utf-16")
     headers = {"Content-Type": "application/json, charset=utf-16"}
     response = httpx.Response(
         200,
@@ -825,7 +825,7 @@ def test_json_with_options():
 )
 def test_json_without_specified_charset(encoding):
     data = {"greeting": "hello", "recipient": "world"}
-    content = json.dumps(data).encode(encoding)
+    content = orjson.dumps(data).encode(encoding)
     headers = {"Content-Type": "application/json"}
     response = httpx.Response(
         200,
@@ -850,7 +850,7 @@ def test_json_without_specified_charset(encoding):
 )
 def test_json_with_specified_charset(encoding):
     data = {"greeting": "hello", "recipient": "world"}
-    content = json.dumps(data).encode(encoding)
+    content = orjson.dumps(data).encode(encoding)
     headers = {"Content-Type": f"application/json; charset={encoding}"}
     response = httpx.Response(
         200,

@@ -1,4 +1,4 @@
-import json
+import orjson
 import logging
 import os
 import random
@@ -40,7 +40,7 @@ def test_encoded(encoding):
 def test_bad_utf_like_encoding():
     content = b"\x00\x00\x00\x00"
     response = httpx.Response(200, content=content)
-    with pytest.raises(json.decoder.JSONDecodeError):
+    with pytest.raises(orjson.decoder.JSONDecodeError):
         response.json()
 
 

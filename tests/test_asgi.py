@@ -1,4 +1,4 @@
-import json
+import orjson
 
 import pytest
 
@@ -16,7 +16,7 @@ async def hello_world(scope, receive, send):
 
 async def echo_path(scope, receive, send):
     status = 200
-    output = json.dumps({"path": scope["path"]}).encode("utf-8")
+    output = orjson.dumps({"path": scope["path"]}).encode("utf-8")
     headers = [(b"content-type", "text/plain"), (b"content-length", str(len(output)))]
 
     await send({"type": "http.response.start", "status": status, "headers": headers})
@@ -25,7 +25,7 @@ async def echo_path(scope, receive, send):
 
 async def echo_raw_path(scope, receive, send):
     status = 200
-    output = json.dumps({"raw_path": scope["raw_path"].decode("ascii")}).encode("utf-8")
+    output = orjson.dumps({"raw_path": scope["raw_path"].decode("ascii")}).encode("utf-8")
     headers = [(b"content-type", "text/plain"), (b"content-length", str(len(output)))]
 
     await send({"type": "http.response.start", "status": status, "headers": headers})
@@ -47,7 +47,7 @@ async def echo_body(scope, receive, send):
 
 async def echo_headers(scope, receive, send):
     status = 200
-    output = json.dumps(
+    output = orjson.dumps(
         {"headers": [[k.decode(), v.decode()] for k, v in scope["headers"]]}
     ).encode("utf-8")
     headers = [(b"content-type", "text/plain"), (b"content-length", str(len(output)))]

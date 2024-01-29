@@ -4,6 +4,10 @@
 # Reference: https://github.com/encode/httpx/pull/1721#discussion_r661241588
 -e .[brotli,cli,http2,socks]
 
+
+# Parsing
+orjson==3.9.12
+
 # Optional charset auto-detection
 # Used in our test cases
 chardet==5.2.0

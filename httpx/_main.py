@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 import functools
-import json
+import orjson
 import sys
 import typing
 
@@ -172,7 +172,7 @@ def print_response(response: Response) -> None:
         if lexer_name.lower() == "json":
             try:
                 data = response.json()
-                text = json.dumps(data, indent=4)
+                text = orjson.dumps(data, indent=4)
             except ValueError:  # pragma: no cover
                 text = response.text
         else:
@@ -277,8 +277,8 @@ def validate_json(
         return None
 
     try:
-        return json.loads(value)
-    except json.JSONDecodeError:  # pragma: no cover
+        return orjson.loads(value)
+    except orjson.JSONDecodeError:  # pragma: no cover
         raise click.BadParameter("Not valid JSON")
 
 
